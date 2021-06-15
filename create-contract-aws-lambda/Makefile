@@ -12,7 +12,9 @@ lint:
 	@go vet ./...
 
 build: test
-	@env CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o ${BINARY}
+	@export GO111MODULE=on
+	# FIX: Add CGO_ENABLED=0 when building go files
+	@env CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o ${BINARY}
 	@shasum -a256 ${BINARY} > ${CHECKSUMFILE}
 	@echo "binary file ${BINARY}"
 
