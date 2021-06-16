@@ -1,8 +1,8 @@
 package services
 
 import (
-	"github.com/wilomendez/Onboarding/create-contract-aws-lambda/db"
-	"github.com/wilomendez/Onboarding/create-contract-aws-lambda/models"
+	"github.com/wilomendez/Onboarding/create-contact-aws-lambda/db"
+	"github.com/wilomendez/Onboarding/create-contact-aws-lambda/models"
 )
 
 type DomainContactService struct {

@@ -4,8 +4,8 @@ import (
 	"context"
 	"log"
 
-	"github.com/wilomendez/Onboarding/create-contract-aws-lambda/models"
-	"github.com/wilomendez/Onboarding/create-contract-aws-lambda/services"
+	"github.com/wilomendez/Onboarding/create-contact-aws-lambda/models"
+	"github.com/wilomendez/Onboarding/create-contact-aws-lambda/services"
 )
 
 type CreateContactHandler struct{}

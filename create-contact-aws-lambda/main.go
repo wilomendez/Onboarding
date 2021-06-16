@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"github.com/aws/aws-lambda-go/lambda"
-	"github.com/wilomendez/Onboarding/create-contract-aws-lambda/controllers"
+	"github.com/wilomendez/Onboarding/create-contact-aws-lambda/controllers"
 )
 
 func main() {

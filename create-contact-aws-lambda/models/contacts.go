@@ -1,7 +1,7 @@
 package models
 
 import (
-	"github.com/wilomendez/Onboarding/create-contract-aws-lambda/utils"
+	"github.com/wilomendez/Onboarding/create-contact-aws-lambda/utils"
 )
 
 type Contacts struct {

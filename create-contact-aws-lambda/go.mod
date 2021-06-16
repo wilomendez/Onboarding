@@ -1,4 +1,4 @@
-module github.com/wilomendez/Onboarding/create-contract-aws-lambda
+module github.com/wilomendez/Onboarding/create-contact-aws-lambda
 
 go 1.16
 
