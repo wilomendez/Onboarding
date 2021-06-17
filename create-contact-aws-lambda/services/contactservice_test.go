@@ -7,6 +7,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/wilomendez/Onboarding/create-contact-aws-lambda/mocks"
 	"github.com/wilomendez/Onboarding/create-contact-aws-lambda/models"
+	//"github.com/wilomendez/Onboarding/create-contact-aws-lambda/utils"
 )
 
 func TestCreate(t *testing.T) {
@@ -26,16 +27,9 @@ func TestCreate(t *testing.T) {
 			LastName:  "English",
 			Status:    "CREATED",
 		}
-		// exceptError  = utils.ValidationError("Input validation FAILED, First Name or Last name is empty")
-		// emptyContact = models.Contacts{
-		// 	Id:        "",
-		// 	FirstName: "",
-		// 	LastName:  "",
-		// 	Status:    "",
-		// }
-		// emptyResponse = models.Response{
-		// 	ContactNumber: "",
-		// }
+		// exceptError   = utils.ValidationError("Input validation FAILED, First Name or Last name is empty")
+		// emptyContact  = models.Contacts{}
+		// emptyResponse = models.Response{}
 	)
 
 	t.Run("CREATE", func(t *testing.T) {
@@ -52,7 +46,7 @@ func TestCreate(t *testing.T) {
 
 		// t.Run("When we receive incorrect data", func(t *testing.T) {
 		// 	gomock.InOrder(
-		// 		mockContactRepo.EXPECT().Create(emptyContact).Return(emptyResponse, exceptError),
+		// 		mockContactRepo.EXPECT().Create(emptyContact).Return(emptyResponse, exceptError).Times(1),
 		// 	)
 
 		// 	_, err := mockContactService.Create(emptyContact)
