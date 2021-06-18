@@ -10,7 +10,7 @@ type DomainContactService struct {
 }
 
 type IContactServices interface {
-	Create(contact models.Contacts) (models.Response, error)
+	Create(contact models.Contacts) (models.Contacts, error)
 }
 
 func New(contactRepo models.IContactsRepo) DomainContactService {
