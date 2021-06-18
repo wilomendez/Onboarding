@@ -20,9 +20,6 @@ Table: Contacts
 
 Contact must be stored with **CREATED** status.
 
-**λ** : **create-contact-dev-wm-go**
-**DynamoDB TableName** : **Contacts_WM**
-
 ## Step 1B - Lambda :white_check_mark:
 
 * The above lambda will need to be configured for the Alias.
@@ -39,3 +36,38 @@ Contact must be stored with **CREATED** status.
   * [DynamoDB](https://antklim.medium.com/dynamodb-expressions-and-go-b8230c253e1f)
 * [Lambda Alias and Versions](https://docs.aws.amazon.com/lambda/latest/dg/configuration-versions.html)
 
+## Step 2 - Api Gateway :white_check_mark:
+
+* Create another lambda to query a **Contact** via API, that complies with the flow: ``` API Gateway -> Lambda -> Dynamo DB ```.
+* The next services must be able called using any tool (for example [Postman](https://www.postman.com/downloads/)).
+* The services response must be JSON objects (See more ``` API Gateway -> Integration Response -> Mapping Templates ```)
+
+**Requirements:**
+* Contact creation API must be exposed using API Gateway (use lambda from step 1)
+  * Route: ```<server>/contacts```
+  * Method: **POST**
+
+* Contact query API must be exposed using API Gatway
+  * Route: ```<server>/contacts/{id}```
+  * Method: **GET**
+
+**Recommended readings:**
+* API Gateway and Lambda integration:
+  * [Create a simple microservice using Lambda and API Gateway](https://docs.aws.amazon.com/lambda/latest/dg/services-apigateway-blueprint.html).
+  * [Integrating API with AWS services lambda](https://docs.aws.amazon.com/apigateway/latest/developerguide/integrating-api-with-aws-services-lambda.html#api-as-lambda-proxy-create-api-resources).
+* API Gateway response mapping:
+  * [Working with models and mapping templates](https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html).
+* Mapping Example:
+  * [Tutorial: Crear una API de REST importando un ejemplo](https://docs.aws.amazon.com/es_es/apigateway/latest/developerguide/api-gateway-create-api-from-example.html)
+
+
+
+## Services
+
+* **λ** : 
+  * **create-contact-dev-wm-go**
+  * **get-contact-dev-wm-go**
+* **API Gateway**
+  * **Onboarding Golang WM**
+* **DynamoDB TableName** 
+  * **Contacts_WM**
