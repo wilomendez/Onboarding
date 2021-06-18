@@ -1,10 +1,10 @@
 package models
 
 type Contacts struct {
-	Id        string `dynamodbav:"id"`
-	FirstName string `dynamodbav:"firstname"`
-	LastName  string `dynamodbav:"lastname"`
-	Status    string `dynamodbav:"status"`
+	Id        string `dynamodbav:"id" json:"id"`
+	FirstName string `dynamodbav:"firstname" json:"first_name"`
+	LastName  string `dynamodbav:"lastname" json:"last_name"`
+	Status    string `dynamodbav:"status" json:"status"`
 }
 
 type IContactsRepo interface {
