@@ -1,4 +1,4 @@
-BINARY=create-contract-aws-lambda
+BINARY=create-contact-aws-lambda
 CHECKSUMFILE=SHA256SUM
 all: build
 
