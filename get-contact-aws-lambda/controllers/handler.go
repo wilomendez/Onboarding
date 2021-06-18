@@ -31,7 +31,7 @@ func (gch *GetcontactHandler) Find(ctx context.Context, request models.Request) 
 	response, err := gch.service.Find(request.Id)
 	if err != nil {
 		log.Println(err.Error())
-		return models.Contacts{}, HandleCustomValidationError(err.Error())
+		return models.Contacts{}, err
 	}
 	return response, nil
 }

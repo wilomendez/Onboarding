@@ -30,3 +30,19 @@ func HandleCustomValidationError(message string) HandleError {
 		Message:    message,
 	}
 }
+
+func HandleNotFoundError(message string) HandleError {
+	return HandleError{
+		StatusCode: http.StatusNotFound,
+		Type:       "Not Found Error",
+		Message:    message,
+	}
+}
+
+func HandleInternalError(message string) HandleError {
+	return HandleError{
+		StatusCode: http.StatusInternalServerError,
+		Type:       "Internal Server Error",
+		Message:    message,
+	}
+}

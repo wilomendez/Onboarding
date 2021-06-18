@@ -1,7 +1,6 @@
 package db
 
 import (
-	"errors"
 	"fmt"
 	"log"
 
@@ -9,6 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
+	"github.com/wilomendez/Onboarding/get-contact-aws-lambda/controllers"
 	"github.com/wilomendez/Onboarding/get-contact-aws-lambda/models"
 )
 
@@ -47,16 +47,16 @@ func (cs *ContactService) Find(id string) (models.Contacts, error) {
 	}
 
 	if result.Item == nil {
-		errMsg = "Could not find '" + id + "'"
+		errMsg = "'" + id + "' Not Found!"
 		log.Println(errMsg)
-		return models.Contacts{}, errors.New(errMsg)
+		return models.Contacts{}, controllers.HandleNotFoundError(errMsg)
 	}
 
 	contact := models.Contacts{}
 	if err = dynamodbattribute.UnmarshalMap(result.Item, &contact); err != nil {
 		errMsg = fmt.Sprintf("Failed to Unmarshall Record! %v", err)
 		log.Println(errMsg)
-		return models.Contacts{}, errors.New(errMsg)
+		return models.Contacts{}, controllers.HandleInternalError(errMsg)
 	}
 	return contact, nil
 }
