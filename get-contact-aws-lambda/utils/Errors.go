@@ -16,7 +16,7 @@ func (err *ErrorMessage) Error() string {
 
 func ValidationError(msg string) error {
 	return &ErrorMessage{
-		Type: "Validation Error",
+		Type: ValidationErrorMessage,
 		Err:  errors.New(msg),
 	}
 }

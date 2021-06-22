@@ -3,6 +3,8 @@ package controllers
 import (
 	"fmt"
 	"net/http"
+
+	"github.com/wilomendez/Onboarding/get-contact-aws-lambda/utils"
 )
 
 type HandleError struct {
@@ -18,7 +20,7 @@ func (h HandleError) Error() string {
 var (
 	errEmptyData = HandleError{
 		StatusCode: http.StatusBadRequest,
-		Type:       "Validation Error",
+		Type:       utils.ValidationErrorMessage,
 		Message:    "Input validation FAILED, ID is empty",
 	}
 )
@@ -26,7 +28,7 @@ var (
 func HandleCustomValidationError(message string) HandleError {
 	return HandleError{
 		StatusCode: http.StatusBadRequest,
-		Type:       "Validation Error",
+		Type:       utils.ValidationErrorMessage,
 		Message:    message,
 	}
 }
