@@ -67,7 +67,12 @@ Contact must be stored with **CREATED** status.
 * **λ** : 
   * **create-contact-dev-wm-go**
   * **get-contact-dev-wm-go**
+  * **notify-contact-dev-wm-go**
 * **API Gateway**
   * **Onboarding Golang WM**
 * **DynamoDB TableName** 
   * **Contacts_WM**
+* **Notifications**
+  * **Topics**
+    * **ContactsTopic_WM**
+  *
