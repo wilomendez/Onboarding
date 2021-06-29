@@ -1,6 +1,6 @@
 # Onboarding
 
-This repo consists in a serie of steps required for probe and acquire the basic concepts of some useful AWS services used in USalá
+This repo consists in a serie of steps required for probe and acquire the basic concepts of some useful AWS services used in Ualá.
 
 ## Requirements
 ### Step 1A :white_check_mark:
@@ -67,7 +67,12 @@ Contact must be stored with **CREATED** status.
 * **λ** : 
   * **create-contact-dev-wm-go**
   * **get-contact-dev-wm-go**
+  * **notify-contact-dev-wm-go**
 * **API Gateway**
   * **Onboarding Golang WM**
 * **DynamoDB TableName** 
   * **Contacts_WM**
+* **Notifications**
+  * **Topics**
+    * **ContactsTopic_WM**
+  *

@@ -1,0 +1,88 @@
+package db
+
+import (
+	"errors"
+	"fmt"
+	"log"
+
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/dynamodb"
+	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
+	"github.com/wilomendez/Onboarding/update-status-contact-aws-lambda/models"
+)
+
+const (
+	REGION    = "us-east-1"
+	TABLENAME = "Contacts_WM"
+)
+
+type ContactService struct {
+	TableName string
+	ddb       *dynamodb.DynamoDB
+}
+
+func New() models.IContactsRepo {
+	sess := session.Must(session.NewSession(&aws.Config{Region: aws.String(REGION)}))
+	return &ContactService{
+		TableName: TABLENAME,
+		ddb:       dynamodb.New(sess),
+	}
+}
+
+func (cs *ContactService) Find(id string) (models.Contacts, error) {
+	var errMsg string
+	result, err := cs.ddb.GetItem(
+		&dynamodb.GetItemInput{
+			Key: map[string]*dynamodb.AttributeValue{
+				"id": {
+					S: aws.String(id),
+				},
+			},
+			TableName: aws.String(TABLENAME),
+		})
+	if err != nil {
+		log.Println("Got error calling GetItem ", err.Error())
+		return models.Contacts{}, err
+	}
+
+	if result.Item == nil {
+		errMsg = "Could not find '" + id + "'"
+		log.Println(errMsg)
+		return models.Contacts{}, errors.New(errMsg)
+	}
+
+	contact := models.Contacts{}
+	if err = dynamodbattribute.UnmarshalMap(result.Item, &contact); err != nil {
+		errMsg = fmt.Sprintf("Failed to Unmarshall Record! %v", err)
+		log.Println(errMsg)
+		return models.Contacts{}, errors.New(errMsg)
+	}
+	return contact, nil
+}
+
+func (cs *ContactService) ChangeStatus(id string) error {
+
+	contact, err := cs.Find(id)
+	if err != nil {
+		log.Println("Item not found!")
+		return err
+	}
+	contact.Process() // Change status to Processed.
+	ctItem, err := dynamodbattribute.MarshalMap(contact)
+	if err != nil {
+		return err
+	}
+	input := &dynamodb.PutItemInput{
+		Item:      ctItem,
+		TableName: aws.String(cs.TableName),
+	}
+
+	_, err = cs.ddb.PutItem(input)
+	if err != nil {
+		log.Println("Error put item into dynamodb", err.Error())
+		return err
+	}
+
+	return nil
+}

@@ -4,6 +4,8 @@ import (
 	"github.com/wilomendez/Onboarding/create-contact-aws-lambda/utils"
 )
 
+const statusCreated string = "CREATED"
+
 type Contacts struct {
 	Id        string `dynamodbav:"id"`
 	FirstName string `dynamodbav:"firstname"`
@@ -13,7 +15,7 @@ type Contacts struct {
 
 func (c *Contacts) Fill_defaults() {
 	if c.Status == "" {
-		c.Status = "CREATED"
+		c.Status = statusCreated
 	}
 
 	if c.Id == "" {
