@@ -75,4 +75,3 @@ Contact must be stored with **CREATED** status.
 * **Notifications**
   * **Topics**
     * **ContactsTopic_WM**
-  *
